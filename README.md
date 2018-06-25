@@ -1,2 +1,8 @@
-# simple_flutter_rest_example
-A simple flutter app that requests data from the randomuser REST API. Names and pictures of persons are displayed in a scrollable list.
+# flutter_rest_example
+
+A new Flutter application.
+
+## Getting Started
+
+For help getting started with Flutter, view our online
+[documentation](https://flutter.io/).
