@@ -2,6 +2,7 @@ name: flutter_rest_example
 description: A new Flutter application.
 
 dependencies:
+  random_words: "^1.0.1"
   flutter:
     sdk: flutter
 

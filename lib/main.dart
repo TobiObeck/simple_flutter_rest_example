@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'package:random_words/random_words.dart';
+
 void main() {
   runApp(new MaterialApp(
     home: new HomePage(),
@@ -22,7 +24,7 @@ class HomePageState extends State<HomePage> {
   Future<String> getData() async {
     var response = await http.get(
         //Uri.encodeFull("https://jsonplaceholder.typicode.com/posts"),
-        Uri.encodeFull("https://randomuser.me/api/?results=20"),
+        Uri.encodeFull("https://randomuser.me/api/?results=50"),
         headers: {
           "Accept": "application/json"
         }
@@ -61,8 +63,11 @@ class HomePageState extends State<HomePage> {
     this.getData();
   }
 
+  String capitalize(String str) => str[0].toUpperCase() + str.substring(1);
+
   @override
   Widget build(BuildContext context) {
+
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Portfolio"),
@@ -79,17 +84,46 @@ class HomePageState extends State<HomePage> {
          new ListView.builder(
             itemCount: data == null ? 0 : data.length,
             itemBuilder: (BuildContext context, int index) {
+              var firstName = capitalize(data[index]["name"]["first"]);
+              var lastName = capitalize(data[index]["name"]["last"]);
+              var fullName =  firstName + " " + lastName;
+
               return new Card(
                 elevation: 2.0,
                 child:
                 new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    new Text(data[index]["name"]["first"] + " "
-                        + data[index]["name"]["last"] + " ("
-                        + data[index]["gender"] + ")"),
-                    Image.network(
-                      data[index]["picture"]["large"],
-                    )
+                    new Column(
+                        children: [
+                          new Container(
+                              width: 140.0,
+                              height: 140.0,
+                              decoration: new BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: new DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: new NetworkImage(data[index]["picture"]["large"])
+                                  )
+                              )),
+                          new Text(fullName, textScaleFactor: 1.5)
+                        ]
+                    ),
+                    new Expanded(
+                      child: new Column(
+                        children: [
+                          new Text(data[index]["gender"]
+                              + " and formerly known as "
+                              + data[index]["login"]["username"]
+                          ),
+                          new Text(
+                              (data[index]["gender"] == "male"? "He" : "She")
+                              + " is " + generateAdjective().take(1).elementAt(0).asLowerCase
+                          ),
+                        ]
+                      ),
+                    ),
+                    //Image.network(data[index]["picture"]["large"]),
                   ],
                 ),
               );
