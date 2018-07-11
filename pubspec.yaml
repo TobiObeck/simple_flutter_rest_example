@@ -1,10 +1,12 @@
-name: flutter_rest_example
+name: simple_flutter_rest_example2
 description: A new Flutter application.
 
 dependencies:
   random_words: "^1.0.1"
   flutter:
     sdk: flutter
+  font_awesome_flutter: "^7.1.0"
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
