@@ -31,8 +31,7 @@ class HomePageState extends State<HomePage> {
           "Accept": "application/json"
         }
     );
-    //print(response.body.split(",").join("\n"));
-    //print(someData["results"]);
+
     this.setState(() {
       var someData = json.decode(response.body);//or jsonDecode();  JSON.decode() is deprecated.
       data = someData["results"];
@@ -44,11 +43,6 @@ class HomePageState extends State<HomePage> {
       //print(user);
     });
 
-    for(int i = 0; i < data.length; i++) {
-      //print(data[i]["name"]["first"] + " (" + data[i]["gender"] + ")");
-      //print(data[i]["picture"]["thumbnail"]);
-      //print(data[i]["picture"] + ", " + data[i]["picture"]["medium"]);//thumbnail  large  //NoSuchMethodError: Class '_InternalLinkedHashMap<String, dynamic>' has no instance method '+'.
-    }
     return "Success!";
   }
 
@@ -171,6 +165,7 @@ class HomePageState extends State<HomePage> {
 }
 //Image.network(data[index]["picture"]["large"]),
 
+//print(response.body.split(",").join("\n"));
 
 /*
   @override
